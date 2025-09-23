@@ -50,17 +50,19 @@
   /* BATTLE ARENA CSS */
 
 /* 
-  div id="inner"> </div> 
-  <div id="two"> </div> 
-  <div id="three"> </div> 
-  <div id="outer"> </div> 
-  <p> </p> */
+<div id="inner"></div>
+<div id="two"></div>
+<div id="three"></div>
+<div id="outer"></div>
+<p></p>
 
-  /* body {
+<style>
+  body {
     background: #f5d6b4;
     display: grid;
     place-items: center;
   }
+
   p {
     position: absolute;
     width: 20px;
@@ -70,31 +72,40 @@
     translate: -110px;
     box-shadow: 80px 0px #d86f45;
   }
+
   div {
     position: absolute;
     border: 20px solid #d86f45;
     border-top: none;
-    border-radius: 0px 0px 100px 100px;
+    border-radius: 0 0 100px 100px;
   }
+
   #inner {
     width: 40px;
     height: 22px;
     rotate: 180deg;
-    translate: 0px -19px;
+    translate: 0 -19px;
   }
+
   #two {
     width: 80px;
     height: 40px;
     translate: -20px 30px;
   }
+
   #three {
     width: 120px;
     height: 60px;
     rotate: 180deg;
-    translate: 0px -40px;
+    translate: 0 -40px;
   }
+
   #outer {
     width: 160px;
     height: 80px;
     translate: -20px 50px;
-  } */
+  }
+</style>
+
+
+*/
