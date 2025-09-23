@@ -1,5 +1,7 @@
+// src/components/BirthdayCalendar.jsx
 import React, { useState, useEffect } from 'react';
 import { samples } from '../../utils/sample';
+import '../index.css'; // Add this import
 
 const BirthdayCalendar = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -76,7 +78,6 @@ const BirthdayCalendar = () => {
       });
     });
 
-    // Sort each day by age (youngest to oldest)
     Object.keys(calendar).forEach(day => {
       calendar[day].sort((a, b) => a.age - b.age);
     });
@@ -125,15 +126,6 @@ const BirthdayCalendar = () => {
           backgroundColor: colors[colorIndex],
           width: squareSize,
           height: squareSize,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          fontSize: '12px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          border: '1px solid white',
-          boxSizing: 'border-box'
         }}
         title={person.name}
       >
@@ -143,59 +135,33 @@ const BirthdayCalendar = () => {
   };
 
   return (
-    <div style={{ 
-      padding: '20px', 
-      fontFamily: 'Arial, sans-serif',
-      backgroundColor: '#f5f5f5',
-      minHeight: '100vh'
-    }}>
-      <h1 style={{ textAlign: 'center', color: '#333', marginBottom: '30px' }}>
+    <div className="birthday-calendar-container">
+      <h1 className="main-title">
         7-Day Birthday Calendar
       </h1>
       
       {/* Controls */}
-      <div style={{ 
-        marginBottom: '30px', 
-        display: 'flex', 
-        gap: '50px', 
-        flexWrap: 'wrap',
-        alignItems: 'flex-start'
-      }}>
-        <div style={{ flex: '1', minWidth: '300px' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
+      <div className="controls-container">
+        <div className="data-input-section">
+          <label className="input-label">
             Birthday Data (JSON):
           </label>
           <textarea
             value={birthdayData}
             onChange={handleDataChange}
-            style={{
-              width: '100%',
-              height: '200px',
-              padding: '10px',
-              border: '2px solid #ddd',
-              borderRadius: '5px',
-              fontFamily: 'monospace',
-              fontSize: '12px',
-              resize: 'vertical'
-            }}
+            className="data-textarea"
             placeholder="Enter birthday data in JSON format..."
           />
         </div>
         
-        <div style={{ minWidth: '150px' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
+        <div className="year-select-section">
+          <label className="input-label">
             Select Year:
           </label>
           <select
             value={selectedYear}
             onChange={handleYearChange}
-            style={{
-              padding: '10px',
-              border: '2px solid #ddd',
-              borderRadius: '5px',
-              fontSize: '16px',
-              width: '100%'
-            }}
+            className="year-select"
           >
             {generateYearOptions().map(year => (
               <option key={year} value={year}>{year}</option>
@@ -205,59 +171,25 @@ const BirthdayCalendar = () => {
       </div>
 
       {/* Calendar */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(7, 1fr)', 
-        gap: '10px',
-        maxWidth: '1200px',
-        margin: '0 auto'
-      }}>
+      <div className="calendar-grid">
         {days.map(day => {
           const peopleOnThisDay = calendarData[day] || [];
           const isEmpty = peopleOnThisDay.length === 0;
-          const gridSize = getGridSize(peopleOnThisDay.length);
           
           return (
-            <div key={day} style={{ 
-              border: '2px solid #333',
-              borderRadius: '10px',
-              minHeight: '200px',
-              backgroundColor: 'white',
-              overflow: 'hidden'
-            }}>
+            <div key={day} className="day-column">
               {/* Day Header */}
-              <div style={{
-                backgroundColor: '#333',
-                color: 'white',
-                padding: '10px',
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: '14px'
-              }}>
+              <div className="day-header">
                 {day}
               </div>
               
               {/* Day Content */}
               <div 
-                className={isEmpty ? 'day-empty' : ''}
-                style={{
-                  padding: '10px',
-                  height: 'calc(100% - 44px)',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignContent: 'flex-start',
-                  minHeight: '156px'
-                }}
+                className={`day-content ${isEmpty ? 'day-empty' : ''}`}
                 title={isEmpty ? '' : peopleOnThisDay.map(p => p.name).join(', ')}
               >
                 {isEmpty ? (
-                  <div style={{ 
-                    width: '100%', 
-                    textAlign: 'center', 
-                    color: '#999',
-                    fontSize: '14px',
-                    marginTop: '50px'
-                  }}>
+                  <div className="empty-message">
                     No birthdays
                   </div>
                 ) : (
@@ -270,8 +202,6 @@ const BirthdayCalendar = () => {
           );
         })}
       </div>
-
-     
     </div>
   );
 };
