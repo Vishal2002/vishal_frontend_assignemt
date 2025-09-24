@@ -1,7 +1,6 @@
-// src/components/BirthdayCalendar.jsx
 import React, { useState, useEffect } from 'react';
 import { samples } from '../../utils/sample';
-import '../index.css'; // Add this import
+import '../index.css';
 
 const BirthdayCalendar = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
